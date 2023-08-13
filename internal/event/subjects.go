@@ -1,5 +1,5 @@
 package event
 
 const (
-	SubjectToDoCreated = "todo.created"
+	SubjectToDosCreated = "to_dos.created"
 )

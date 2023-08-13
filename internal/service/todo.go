@@ -6,6 +6,8 @@ import (
 	"time"
 
 	"github.com/hampgoodwin/errors"
+	eventv1 "github.com/hampgoodwin/todo/gen/proto/go/to_do/event/v1"
+	"github.com/hampgoodwin/todo/internal/event"
 	"github.com/hampgoodwin/todo/internal/meta"
 	"github.com/hampgoodwin/todo/internal/todo"
 	"github.com/hampgoodwin/todo/internal/transformer"
@@ -13,6 +15,7 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/attribute"
 	"go.opentelemetry.io/otel/trace"
+	"go.uber.org/zap"
 )
 
 type ListToDosReqest struct {
@@ -57,6 +60,11 @@ func (s *Service) CreateToDos(ctx context.Context, creates []todo.ToDo) ([]todo.
 	}
 
 	toDos := transformer.NewToDosFromRepoToDos(repoToDos)
+
+	protoToDos := transformer.NewProtoToDosFromToDos(toDos)
+	if err := s.publisher.Publish(event.SubjectToDosCreated, &eventv1.ToDosCreated{ToDos: protoToDos}); err != nil {
+		s.log.Error("publishing todos created message", zap.Error(err))
+	}
 
 	return toDos, nil
 }

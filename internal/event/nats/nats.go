@@ -30,11 +30,11 @@ func NewNATSJetStream(nec *nats.EncodedConn) (nats.JetStreamContext, error) {
 	todoStreamConfiguration := &nats.StreamConfig{
 		Name:        "todo",
 		Description: "all todo subjects",
-		Subjects:    []string{event.SubjectToDoCreated},
+		Subjects:    []string{event.SubjectToDosCreated},
 	}
 	_, err = jsc.AddStream(todoStreamConfiguration)
 	if err != nil {
-		return nil, fmt.Errorf("adding account stream: %w", err)
+		return nil, fmt.Errorf("adding todos stream: %w", err)
 	}
 
 	return jsc, nil

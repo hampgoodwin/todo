@@ -7,7 +7,7 @@ import (
 	"github.com/nats-io/nats.go/encoders/protobuf"
 	"google.golang.org/protobuf/proto"
 
-	modelv1 "github.com/hampgoodwin/todo/gen/proto/go/to_do/model/v1"
+	eventv1 "github.com/hampgoodwin/todo/gen/proto/go/to_do/event/v1"
 	"github.com/hampgoodwin/todo/internal/event"
 )
 
@@ -24,13 +24,13 @@ func WireTap(url string) (*nats.EncodedConn, error) {
 
 func messageHandler(msg *nats.Msg) {
 	switch msg.Subject {
-	case event.SubjectToDoCreated:
-		account := &modelv1.ToDo{}
-		err := proto.Unmarshal(msg.Data, account)
+	case event.SubjectToDosCreated:
+		toDosCreated := &eventv1.ToDosCreated{}
+		err := proto.Unmarshal(msg.Data, toDosCreated)
 		if err != nil {
-			fmt.Printf("error unmarshaling message on subject %q", event.SubjectToDoCreated)
+			fmt.Printf("error unmarshaling message on subject %q", event.SubjectToDosCreated)
 		}
-		fmt.Printf("received %q\n%v\n", event.SubjectToDoCreated, account)
+		fmt.Printf("received %q\n%v\n", event.SubjectToDosCreated, toDosCreated)
 	default:
 		fmt.Printf("unhandled event received on subject %q\n", msg.Sub.Subject)
 	}

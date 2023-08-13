@@ -2,7 +2,7 @@
 
 A simple todo applications
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/hampgoodwin/todo)](https://goreportcard.com/report/github.com/hampgoodwin/todo) [![Coverage Status](https://coveralls.io/repos/github/hampgoodwin/GoLuca/badge.svg)](https://coveralls.io/github/hampgoodwin/GoLuca) [![golangci-lint](https://github.com/hampgoodwin/todo/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/hampgoodwin/todo/actions/workflows/golangci-lint.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/hampgoodwin/todo)](https://goreportcard.com/report/github.com/hampgoodwin/todo) [![golangci-lint](https://github.com/hampgoodwin/todo/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/hampgoodwin/todo/actions/workflows/golangci-lint.yml)
 [![buf-lint](https://github.com/hampgoodwin/todo/actions/workflows/buf-lint.yml/badge.svg)](https://github.com/hampgoodwin/todo/actions/workflows/buf-lint.yml)
 
 ## Quickstart
@@ -12,7 +12,45 @@ make up && make run
 # Optionally, to view the todo created events, run the wiretap in another shell window
 make runwiretap
 ```
-This will start the underlying database and start the todo application server
+
+This will start the underlying database and start the todo application server.
+
+To test start up your favorite gRPC client (or gui. I like postman and now deprecated bloomRPC).
+
+Either source the proto files from this repository to fill in your grpc tooling, or make this request:
+
+```json
+{
+  "create_to_dos": [
+    {
+      "message": "yubblebubble",
+      "details": "gotta do the yubble bubble",
+      "due_date": {
+        "seconds": 20,
+        "nanos": 10
+      },
+      "priority": 3,
+      "level_of_effort": 3
+    }
+  ]
+}
+```
+
+This should be called against the CreateToDos endpoint. Feel free to modify the message or details. Also, modifying the priority and level of effort should work. However, they are enums and have limits. If an incorrect value is used, it will default to `unspecified` so as to not cause an error. This can be modified.
+
+The ListToDos endpoint example is below
+
+```json
+{
+  "ids": [
+    {valid_ksuid}
+  ],
+  "page_size": 10,
+  "page_token": ""
+}
+```
+
+There is rudimentary pagination on this service. If you create a few to dos, then performa  list with a low page size, you'll get back a next page token. You can use that in the subsequent request. You may, of course, omit the `ids` filter, as it is optional.
 
 ## Tooling
 

@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS to_dos(
 	id VARCHAR(256) PRIMARY KEY,
 	message VARCHAR(256) NOT NULL,
 	details TEXT,
-	due_by TIMESTAMP,
+	due_date TIMESTAMP,
 	priority VARCHAR(256),
 	level_of_effort VARCHAR(256),
 

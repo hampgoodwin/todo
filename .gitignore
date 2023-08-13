@@ -1,3 +1,5 @@
 .env.toml
 cover.out
 .vscode/
+
+*__debug_bin

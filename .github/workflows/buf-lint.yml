@@ -1,0 +1,23 @@
+name: buf
+
+on: pull_request
+  
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: buf-setup-action
+        uses: bufbuild/buf-setup-action@v1.19.0
+        with:
+          github_token: ${{ github.token }}
+      - name: buf-lint-action
+        uses: bufbuild/buf-lint-action@v1.0.3
+        with:
+          input: 'proto'
+      # - name: buf-breaking
+      #   uses: bufbuild/buf-breaking-action@v1.1.2
+      #   with:
+      #     input: 'proto'
+      #     against: 'https://github.com/hampgoodwin/todo.git#branch=main,ref=HEAD,subdir=proto'

@@ -60,7 +60,7 @@ func (c *Controller) ListToDos(ctx context.Context, req *servicev1.ListToDosRequ
 	defer span.End()
 
 	if err := validate.Validate(req); err != nil {
-		return nil, c.respondError(ctx, c.log, errors.WithErrorMessage(err, errors.NotValidRequest, "validating list todos request"))
+		return nil, c.respondError(ctx, c.log, errors.WithErrorMessage(err, errors.NotValidRequestData, "validating list todos request"))
 	}
 
 	pageSize := req.GetPageSize()
