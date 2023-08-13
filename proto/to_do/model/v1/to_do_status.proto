@@ -5,18 +5,18 @@ package to_do.model.v1;
 import "google/protobuf/timestamp.proto";
 
 message ToDoStatus {
-    string id = 1;
-    Status Status = 2;
+  string id = 1;
+  Status status = 2;
 
-    optional google.protobuf.Timestamp created_at = 3;
-    optional google.protobuf.Timestamp updated_at = 4;
-    optional google.protobuf.Timestamp deleted_at = 5;
+  optional google.protobuf.Timestamp created_at = 3;
+  optional google.protobuf.Timestamp updated_at = 4;
+  optional google.protobuf.Timestamp deleted_at = 5;
 }
 
 enum Status {
-    STATUS_UNSPECIFIED = 0;
-    STATUS_CREATED = 1;
-    STATUS_IN_PROGRESS = 2;
-    STATUS_COMPLETED = 3;
-    STATUS_CANCELED = 4;
+  STATUS_UNSPECIFIED = 0;
+  STATUS_CREATED = 1;
+  STATUS_IN_PROGRESS = 2;
+  STATUS_COMPLETED = 3;
+  STATUS_CANCELED = 4;
 }

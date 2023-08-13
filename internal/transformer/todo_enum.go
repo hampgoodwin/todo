@@ -39,28 +39,28 @@ func pbToDoPriorityTypeToToDoPriority(in *modelv1.Priority) todo.Priority {
 }
 
 var toDoLevelOfEffortToPBToDoLevelOfEffortMap = map[todo.LevelOfEffort]modelv1.LevelOfEffort{
-	todo.LevelOfEffortUnspecified: modelv1.LevelOfEffort_LEVEL_UNSPECIFIED,
-	todo.LevelOfEffortOne:         modelv1.LevelOfEffort_LEVEL_ONE,
-	todo.LevelOfEffortTwo:         modelv1.LevelOfEffort_LEVEL_TWO,
-	todo.LevelOfEffortThree:       modelv1.LevelOfEffort_LEVEL_THREE,
-	todo.LevelOfEffortFour:        modelv1.LevelOfEffort_LEVEL_FOUR,
-	todo.LevelOfEffortFive:        modelv1.LevelOfEffort_LEVEL_FIVE,
+	todo.LevelOfEffortUnspecified: modelv1.LevelOfEffort_LEVEL_OF_EFFORT_UNSPECIFIED,
+	todo.LevelOfEffortOne:         modelv1.LevelOfEffort_LEVEL_OF_EFFORT_ONE,
+	todo.LevelOfEffortTwo:         modelv1.LevelOfEffort_LEVEL_OF_EFFORT_TWO,
+	todo.LevelOfEffortThree:       modelv1.LevelOfEffort_LEVEL_OF_EFFORT_THREE,
+	todo.LevelOfEffortFour:        modelv1.LevelOfEffort_LEVEL_OF_EFFORT_FOUR,
+	todo.LevelOfEffortFive:        modelv1.LevelOfEffort_LEVEL_OF_EFFORT_FIVE,
 }
 
 func toDoLevelOfEffortToPBToDoLevelOfEffort(in todo.LevelOfEffort) modelv1.LevelOfEffort {
 	if v, ok := toDoLevelOfEffortToPBToDoLevelOfEffortMap[in]; ok {
 		return v
 	}
-	return modelv1.LevelOfEffort_LEVEL_UNSPECIFIED
+	return modelv1.LevelOfEffort_LEVEL_OF_EFFORT_UNSPECIFIED
 }
 
 var pbToDoLevelOfEffortToToDoLevelOfEffortMap = map[modelv1.LevelOfEffort]todo.LevelOfEffort{
-	modelv1.LevelOfEffort_LEVEL_UNSPECIFIED: todo.LevelOfEffortUnspecified,
-	modelv1.LevelOfEffort_LEVEL_ONE:         todo.LevelOfEffortOne,
-	modelv1.LevelOfEffort_LEVEL_TWO:         todo.LevelOfEffortTwo,
-	modelv1.LevelOfEffort_LEVEL_THREE:       todo.LevelOfEffortThree,
-	modelv1.LevelOfEffort_LEVEL_FOUR:        todo.LevelOfEffortFour,
-	modelv1.LevelOfEffort_LEVEL_FIVE:        todo.LevelOfEffortFive,
+	modelv1.LevelOfEffort_LEVEL_OF_EFFORT_UNSPECIFIED: todo.LevelOfEffortUnspecified,
+	modelv1.LevelOfEffort_LEVEL_OF_EFFORT_ONE:         todo.LevelOfEffortOne,
+	modelv1.LevelOfEffort_LEVEL_OF_EFFORT_TWO:         todo.LevelOfEffortTwo,
+	modelv1.LevelOfEffort_LEVEL_OF_EFFORT_THREE:       todo.LevelOfEffortThree,
+	modelv1.LevelOfEffort_LEVEL_OF_EFFORT_FOUR:        todo.LevelOfEffortFour,
+	modelv1.LevelOfEffort_LEVEL_OF_EFFORT_FIVE:        todo.LevelOfEffortFive,
 }
 
 func pbToDoLevelOfEffortToToDoLevelOfEffort(in *modelv1.LevelOfEffort) todo.LevelOfEffort {

@@ -3,7 +3,6 @@ syntax = "proto3";
 package to_do.service.v1;
 
 import "google/protobuf/timestamp.proto";
-
 import "to_do/model/v1/to_do.proto";
 
 message CreateToDos {

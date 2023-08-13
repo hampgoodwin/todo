@@ -3,7 +3,6 @@ syntax = "proto3";
 package to_do.model.v1;
 
 import "google/protobuf/timestamp.proto";
-
 import "to_do/model/v1/to_do_status.proto";
 
 message ToDo {
@@ -29,10 +28,10 @@ enum Priority {
 }
 
 enum LevelOfEffort {
-  LEVEL_UNSPECIFIED = 0;
-  LEVEL_ONE = 1;
-  LEVEL_TWO = 2;
-  LEVEL_THREE = 3;
-  LEVEL_FOUR = 4;
-  LEVEL_FIVE = 5;
+  LEVEL_OF_EFFORT_UNSPECIFIED = 0;
+  LEVEL_OF_EFFORT_ONE = 1;
+  LEVEL_OF_EFFORT_TWO = 2;
+  LEVEL_OF_EFFORT_THREE = 3;
+  LEVEL_OF_EFFORT_FOUR = 4;
+  LEVEL_OF_EFFORT_FIVE = 5;
 }
