@@ -63,7 +63,7 @@ func (c *Controller) ListToDos(ctx context.Context, req *servicev1.ListToDosRequ
 		return nil, c.respondError(ctx, c.log, errors.WithErrorMessage(err, errors.NotValidRequest, "validating list todos request"))
 	}
 
-	var pageSize int32
+	pageSize := req.GetPageSize()
 	if req.GetPageSize() == 0 {
 		pageSize = defaultPageSize
 	}
@@ -81,6 +81,9 @@ func (c *Controller) ListToDos(ctx context.Context, req *servicev1.ListToDosRequ
 		Cursor:   pageToken.LastID,
 		PageSize: pageSize + 1, // get one additional to determine if there is a next page
 	})
+	if err != nil {
+		return nil, c.respondError(ctx, c.log, errors.WithErrorMessage(err, errors.NotKnown, "getting to dos"))
+	}
 
 	var nextPageToken string
 	protoTodos := []*modelv1.ToDo{}
@@ -94,7 +97,7 @@ func (c *Controller) ListToDos(ctx context.Context, req *servicev1.ListToDosRequ
 	}
 
 	response := &servicev1.ListToDosResponse{
-		ToDos:         protoTodos[:len(protoTodos)-2],
+		ToDos:         protoTodos,
 		NextPageToken: nextPageToken,
 	}
 

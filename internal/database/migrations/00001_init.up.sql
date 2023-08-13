@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS to_dos(
 	updated_at TIMESTAMP DEFAULT NOW() NOT NULL,
 	deleted_at TIMESTAMP DEFAULT NOW()
 )
+;
 
 CREATE TABLE IF NOT EXISTS to_dos_statuses(
 	id VARCHAR(256) PRIMARY KEY,
@@ -21,10 +22,11 @@ CREATE TABLE IF NOT EXISTS to_dos_statuses(
 
 	created_at TIMESTAMP DEFAULT NOW() NOT NULL,
 	updated_at TIMESTAMP DEFAULT NOW() NOT NULL,
-	deleted_at TIMESTAMP DEFAULT NOW()
+	deleted_at TIMESTAMP DEFAULT NOW(),
 
-	CONSTRAINT fk_to_do FOREIGN KEY(to_do_id) REFERENCES to_dos(id),
+	CONSTRAINT fk_to_do_id FOREIGN KEY(to_do_id) REFERENCES to_dos(id)
 )
+;
 
 COMMIT
 ;

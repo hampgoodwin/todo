@@ -39,6 +39,7 @@ func main() {
 	// The environment includes the minimum necessary dependencies to start the application
 	env, err := environment.New(environment.Environment{}, "/etc/todo/.env.toml")
 	if err != nil {
+		_ = tpShutdownFn(ctx)
 		log.Panic("failed to create new environment")
 	}
 

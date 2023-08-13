@@ -7,7 +7,7 @@ import (
 	"github.com/hampgoodwin/errors"
 	"github.com/hampgoodwin/todo/internal/config"
 	"github.com/hampgoodwin/todo/internal/validate"
-	"github.com/pelletier/go-toml/v2"
+	"github.com/pelletier/go-toml"
 )
 
 // Load at rest configuration into memory

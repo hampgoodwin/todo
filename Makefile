@@ -32,6 +32,7 @@ runwiretap:
 
 up:
 	docker-compose -f $$(pwd)/build/package/docker-compose.yml up -d
+	@ echo "view jaeger at http://localhost:16686"
 
 down:
 	docker-compose -f $$(pwd)/build/package/docker-compose.yml down
