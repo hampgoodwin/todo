@@ -1,4 +1,4 @@
-GOLANGCI_LINT_VERSION = latest
+GOLANGCI_LINT_VERSION = v1.53.3
 
 .PHONY: buf
 buf:

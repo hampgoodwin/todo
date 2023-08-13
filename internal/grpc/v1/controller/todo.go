@@ -4,7 +4,6 @@ import (
 	"context"
 
 	"github.com/hampgoodwin/errors"
-	modelv1 "github.com/hampgoodwin/todo/gen/proto/go/to_do/model/v1"
 	servicev1 "github.com/hampgoodwin/todo/gen/proto/go/to_do/service/v1"
 	"github.com/hampgoodwin/todo/internal/grpc/pagination/v1"
 	"github.com/hampgoodwin/todo/internal/meta"
@@ -86,14 +85,11 @@ func (c *Controller) ListToDos(ctx context.Context, req *servicev1.ListToDosRequ
 	}
 
 	var nextPageToken string
-	protoTodos := []*modelv1.ToDo{}
+	protoTodos := transformer.NewProtoToDosFromToDos(todos)
 	if int32(len(todos)) > pageSize {
 		nextPageToken = pageToken.Next(todos[len(todos)-1].ID).String()
 		// we asked for one more todo than requested in order to handle pagination completely grpc interface side
 		protoTodos = transformer.NewProtoToDosFromToDos(todos[:len(todos)-2]) // take all but
-	} else {
-		// Not enough records to meet the request pagesize
-		protoTodos = transformer.NewProtoToDosFromToDos(todos) // take all but
 	}
 
 	response := &servicev1.ListToDosResponse{
