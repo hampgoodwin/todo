@@ -1,0 +1,49 @@
+services:
+# Core Dependencies
+  db:
+    image: postgres:latest
+    volumes:
+      - db_data:/var/lib/pgdata_todo
+    environment:
+      POSTGRES_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+      POSTGRES_DB: todo
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_root_password
+      - db_password
+    ports:
+      - "5432:5432"
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"
+    command:
+      - --jetstream
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    environment:
+      COLLECTOR_ZIPKIN_HOST_PORT: 9411
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - "6831:6831"
+      - "6832:6832"
+      - "5778:5778"
+      - "16686:16686"
+      - "4317:4317"
+      - "4318:4318"
+      - "14250:14250"
+      - "14268:14268"
+      - "14269:14269"
+      - "9411:9411"
+
+secrets:
+   db_password:
+     file: ./secrets/db_password
+   db_root_password:
+     file: ./secrets/db_root_password
+
+volumes:
+    db_data:

@@ -1,0 +1,30 @@
+START TRANSACTION
+;
+
+CREATE TABLE IF NOT EXISTS to_dos(
+	id VARCHAR(256) PRIMARY KEY,
+	message VARCHAR(256) NOT NULL,
+	details TEXT,
+	due_by TIMESTAMP,
+	priority VARCHAR(256),
+	level_of_effort VARCHAR(256),
+
+	created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+	updated_at TIMESTAMP DEFAULT NOW() NOT NULL,
+	deleted_at TIMESTAMP DEFAULT NOW()
+)
+
+CREATE TABLE IF NOT EXISTS to_dos_statuses(
+	id VARCHAR(256) PRIMARY KEY,
+	to_do_id VARCHAR(256),
+	status VARCHAR(256) NOT NULL,
+
+	created_at TIMESTAMP DEFAULT NOW() NOT NULL,
+	updated_at TIMESTAMP DEFAULT NOW() NOT NULL,
+	deleted_at TIMESTAMP DEFAULT NOW()
+
+	CONSTRAINT fk_to_do FOREIGN KEY(to_do_id) REFERENCES to_dos(id),
+)
+
+COMMIT
+;

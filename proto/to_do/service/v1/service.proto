@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package to_do.service.v1;
+
+import "google/protobuf/timestamp.proto";
+
+import "to_do/model/v1/to_do.proto";
+
+message CreateToDos {
+  string message = 1;
+  optional string details = 2;
+  optional google.protobuf.Timestamp due_date = 3;
+  optional to_do.model.v1.Priority priority = 4;
+  optional to_do.model.v1.LevelOfEffort level_of_effort = 5;
+}
+
+message CreateToDosRequest {
+  repeated CreateToDos create_to_dos = 1;
+}
+
+message CreateToDosResponse {
+  repeated to_do.model.v1.ToDo to_dos = 1;
+}
+
+message ListToDosRequest {
+  // ids
+  repeated string ids = 1;
+  // pagination
+  int32 page_size = 2;
+  string page_token = 3;
+}
+
+message ListToDosResponse {
+  repeated to_do.model.v1.ToDo to_dos = 1;
+  string next_page_token = 2;
+}
+
+service ToDoService {
+  rpc CreateToDos(CreateToDosRequest) returns (CreateToDosResponse) {}
+  rpc ListToDos(ListToDosRequest) returns (ListToDosResponse) {}
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package to_do.event.v1;
+
+import "to_do/model/v1/to_do.proto";
+
+message ToDoCreated {
+  to_do.model.v1.ToDo to_do = 1;
+}

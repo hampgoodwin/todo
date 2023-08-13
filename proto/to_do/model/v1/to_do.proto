@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package to_do.model.v1;
+
+import "google/protobuf/timestamp.proto";
+
+import "to_do/model/v1/to_do_status.proto";
+
+message ToDo {
+  string id = 1;
+  string message = 2;
+  optional string details = 3;
+  optional google.protobuf.Timestamp due_date = 4;
+  optional Priority priority = 5;
+  optional LevelOfEffort level_of_effort = 6;
+
+  repeated to_do.model.v1.ToDoStatus statuses = 7;
+
+  optional google.protobuf.Timestamp created_at = 8;
+  optional google.protobuf.Timestamp updated_at = 9;
+  optional google.protobuf.Timestamp deleted_at = 10;
+}
+
+enum Priority {
+  PRIORITY_UNSPECIFIED = 0;
+  PRIORITY_LOW = 1;
+  PRIORITY_MEDIUM = 2;
+  PRIORITY_HIGH = 3;
+}
+
+enum LevelOfEffort {
+  LEVEL_UNSPECIFIED = 0;
+  LEVEL_ONE = 1;
+  LEVEL_TWO = 2;
+  LEVEL_THREE = 3;
+  LEVEL_FOUR = 4;
+  LEVEL_FIVE = 5;
+}
